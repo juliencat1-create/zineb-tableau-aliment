@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste d'Aliments Prioritaires - Zineb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f7fafc;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .main-title {
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .green-section .section-title {
+            color: #38a169;
+            border-bottom-color: #38a169;
+        }
+        
+        .red-section .section-title {
+            color: #e53e3e;
+            border-bottom-color: #e53e3e;
+        }
+        
+        .yellow-section .section-title {
+            color: #d69e2e;
+            border-bottom-color: #d69e2e;
+        }
+        
+        .purple-section .section-title {
+            color: #805ad5;
+            border-bottom-color: #805ad5;
+        }
+        
+        .category {
+            margin-bottom: 20px;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+            background: #f7fafc;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .food-list {
+            margin-left: 15px;
+        }
+        
+        .food-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .food-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-right: 8px;
+        }
+        
+        .food-description {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        
+        .bullet {
+            color: #667eea;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        .rules-section {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        
+        .rules-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .rule-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .rule-number {
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .rule-text {
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+        
+        .rule-strong {
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Liste d'Aliments Prioritaires</h1>
+            <p class="subtitle">Guide nutritionnel personnalisé pour Zineb</p>
+        </div>
+        
+        <div class="content-grid">
+            <!-- Aliments Prioritaires -->
+            <div class="section green-section">
+                <h2 class="section-title">🟢 ALIMENTS PRIORITAIRES</h2>
+                
+                <div class="category">
+                    <h3 class="category-title">Protéines Anti-inflammatoires</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Poissons gras</span>
+                            <span class="food-description">(4x/semaine) : saumon sauvage, maquereau, sardines, truite</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Œufs</span>
+                            <span class="food-description">(quotidien possible) : toutes préparations sauf frits</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Fromages affinés</span>
+                            <span class="food-description">: comté 24 mois, parmesan, manchego, feta</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Tofu ferme</span>
+                            <span class="food-description">et tempeh (petites quantités)</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Biltong</span>
+                            <span class="food-description">(viande séchée) : collation protéinée idéale</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">Glucides Bien Tolérés</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Quinoa</span>
+                            <span class="food-description">: anti-inflammatoire, protéines complètes</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Riz basmati/thai</span>
+                            <span class="food-description">: digestible, énergie stable</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Sarrasin</span>
+                            <span class="food-description">: sans gluten, riche en antioxydants</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Patates douces</span>
+                            <span class="food-description">: fibres solubles, bêta-carotène</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Pommes de terre</span>
+                            <span class="food-description">(sans peau) : énergie, potassium</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">Légumes Sûrs</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Courgettes</span>
+                            <span class="food-description">: toutes préparations</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Carottes cuites</span>
+                            <span class="food-description">: bêta-carotène, fibres solubles</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Épinards cuits</span>
+                            <span class="food-description">: fer, magnésium (crus en petite quantité)</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Courge butternut</span>
+                            <span class="food-description">(75g max) : vitamine A</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Concombre</span>
+                            <span class="food-description">(sans peau) : hydratation</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Aubergine</span>
+                            <span class="food-description">: elle tolère bien</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">Graisses Neuroprotectrices</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Huile d'olive extra vierge</span>
+                            <span class="food-description">: polyphénols</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Avocat</span>
+                            <span class="food-description">(1/4 par repas) : oméga-9</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Graines de chia/lin moulues</span>
+                            <span class="food-description">: oméga-3 végétaux</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Amandes, noix</span>
+                            <span class="food-description">(10-15 unités) : vitamine E</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Huile de coco</span>
+                            <span class="food-description">: TCM pour énergie cérébrale</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aliments à Éviter -->
+            <div class="section red-section">
+                <h2 class="section-title">🔴 ALIMENTS À ÉVITER STRICTEMENT</h2>
+                
+                <div class="category">
+                    <h3 class="category-title">Irritants Digestifs Confirmés</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Poivrons</span>
+                            <span class="food-description">(tous) : intolérance personnelle</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Oignon, ail frais</span>
+                            <span class="food-description">: FODMAPs élevés</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Maïs</span>
+                            <span class="food-description">(toutes formes) : douleurs importantes</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Lait de vache frais</span>
+                            <span class="food-description">: transit accéléré</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">Pro-inflammatoires (SEP)</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Viandes rouges</span>
+                            <span class="food-description">: limiter à 1x/semaine maximum</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Charcuteries</span>
+                            <span class="food-description">: nitrites + graisses saturées</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Produits ultra-transformés</span>
+                            <span class="food-description">: additifs inflammatoires</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Sucres raffinés</span>
+                            <span class="food-description">: pics glycémiques, inflammation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">FODMAPs Problématiques</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Pain/gluten</span>
+                            <span class="food-description">: ballonnements confirmés</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Légumineuses</span>
+                            <span class="food-description">(sauf lentilles corail en test)</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Choux, brocolis</span>
+                            <span class="food-description">: fermentation excessive</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Topinambours, artichauts</span>
+                            <span class="food-description">: très fermentescibles</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Aliments fermentés</span>
+                            <span class="food-description">: choucroute, kimchi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aliments à Tester -->
+            <div class="section yellow-section">
+                <h2 class="section-title">🟡 ALIMENTS À TESTER/MODULER</h2>
+                
+                <div class="category">
+                    <h3 class="category-title">Selon Tolérance Individuelle</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Tomates</span>
+                            <span class="food-description">: OK en quantité modérée (8-10 cerises)</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Fruits</span>
+                            <span class="food-description">: banane peu mûre, myrtilles, fraises</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Yaourts végétaux</span>
+                            <span class="food-description">: coco, amande</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Lentilles corail</span>
+                            <span class="food-description">: phase de réintroduction</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Fromage de brebis</span>
+                            <span class="food-description">: petites quantités</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Compléments -->
+            <div class="section purple-section">
+                <h2 class="section-title">💊 COMPLÉMENTS ESSENTIELS (SEP)</h2>
+                
+                <div class="category">
+                    <h3 class="category-title">Prioritaires</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Vitamine D3</span>
+                            <span class="food-description">: 4000-5000 UI/jour</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Oméga-3</span>
+                            <span class="food-description">: 3g EPA/DHA si poisson <4x/semaine</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Probiotiques</span>
+                            <span class="food-description">: Lactobacillus, Bifidobacterium</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Magnésium</span>
+                            <span class="food-description">: 300-400mg (glycinate)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3 class="category-title">Secondaires</h3>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Complexe B</span>
+                            <span class="food-description">: notamment B12</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">Curcuma + poivre noir</span>
+                            <span class="food-description">: anti-inflammatoire</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="bullet">•</span>
+                            <span class="food-name">CoQ10</span>
+                            <span class="food-description">: soutien mitochondrial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Règles d'Or -->
+        <div class="rules-section">
+            <h2 class="rules-title">📋 RÈGLES D'OR</h2>
+            <div class="rules-grid">
+                <div class="rule-item">
+                    <div class="rule-number">1</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Cuisson douce</span> : vapeur, pochée, papillote
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-number">2</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Température tiède</span> : éviter très chaud/très froid
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-number">3</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Mastiquer 20-30 fois</span> : prédigestion optimale
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-number">4</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Hydratation</span> : 2,5L/jour minimum
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-number">5</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Journal alimentaire</span> : noter corrélations symptômes/aliments
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-number">6</div>
+                    <div class="rule-text">
+                        <span class="rule-strong">Flexibilité 80/20</span> : perfection non requise
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
